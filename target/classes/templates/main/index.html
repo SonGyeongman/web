@@ -1,0 +1,70 @@
+<!doctype html>
+<html lang="ko" xmlns:th="https://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" th:href="@{/resources/stylesheets/common.css}">
+    <link rel="stylesheet" th:href="@{/main/resources/stylesheets/index.css}">
+    <title>명함목록입니다</title>
+</head>
+<body>
+<div class="user-container">
+    <div class="user" th:text="${sessionEntity.getName + '님'}"></div>
+    <div class="logout">
+        <a th:href="@{/user/logout}">로그아웃</a>
+    </div>
+</div>
+<div class="title-container">
+    <div>명함 목록</div>
+    <a th:href="@{/main/add}">추가</a>
+</div>
+<div class="table-container">
+    <table>
+        <thead>
+        <tr>
+            <th>회사이름</th>
+            <th>이름(직책)</th>
+            <th>전화번호</th>
+            <th>이메일</th>
+            <th>주소</th>
+            <th>관리</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="businessCardVo : ${businessCardVos.getBusinessCardEntity}">
+            <td th:text="${businessCardVo.getCompanyName()}"></td>
+            <td th:text="${businessCardVo.getName() + ' ' + businessCardVo.getPosition()}"></td>
+            <td th:text="${businessCardVo.getPhone()}"></td>
+            <td th:text="${businessCardVo.getEmail()}"></td>
+            <td th:text="${businessCardVo.getAddress()}"></td>
+            <td>
+                <a class="remove" onclick="alert('정말로 삭제하겠습니까?');" th:href="@{/main/remove(index = ${businessCardVo.getIndex()})}">삭제</a>
+                <a class="update" th:href="@{/main/update(index = ${businessCardVo.getIndex()})}">수정</a>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+    <div class="number">
+        <a th:href="@{'/main/list/' + ${businessCardVos.getMinPage()}}" target="_self"
+           th:if="${businessCardVos.getRequestPage() > businessCardVos.getMinPage()}">&lt;&lt;</a>
+        <a th:href="@{'list/' + ${businessCardVos.getRequestPage() - 1}}" target="_self"
+           th:if="${businessCardVos.getRequestPage() > businessCardVos.getMinPage()}">&lt;</a>
+
+        <a th:href="@{'/main/list/' + ${page}}"
+           th:each="page : ${#numbers.sequence(businessCardVos.getStartPage(), businessCardVos.getRequestPage()-1)}"
+           th:text="${page}" th:if="${businessCardVos.getRequestPage() > businessCardVos.getMinPage()}"></a>
+        <a th:text="${businessCardVos.getRequestPage()}" style="border: 0.0625rem solid black;"></a>
+        <a th:href="@{'/main/list/' + ${page}}"
+           th:each="page : ${#numbers.sequence(businessCardVos.getRequestPage() + 1, businessCardVos.getEndPage())}"
+           th:text="${page}" th:if="${businessCardVos.getRequestPage() < businessCardVos.getMaxPage()}"></a>
+
+        <a th:href="@{'/main/list/' + ${businessCardVos.getRequestPage() + 1}}" target="_self"
+           th:if="${businessCardVos.getRequestPage() < businessCardVos.getMaxPage()}">&gt;</a>
+        <a th:href="@{'/main/list/' + ${businessCardVos.getMaxPage()}}" target="_self"
+           th:if="${businessCardVos.getRequestPage() < businessCardVos.getMaxPage()}">&gt;&gt;</a>
+    </div>
+</div>
+</body>
+</html>

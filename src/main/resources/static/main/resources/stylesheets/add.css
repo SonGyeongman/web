@@ -1,0 +1,113 @@
+@charset "UTF-8";
+body > .register-container{
+    width: 100%;
+    height: 100%;
+    align-items: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+body > .register-container > .title{
+    margin-top: 4rem;
+    margin-bottom: 1rem;
+    font-size: 1.5rem;
+}
+
+/* 회원가입 정렬 및 전체 설정 */
+body > .register-container > .register-form{
+    width: 30rem;
+    align-items: flex-start;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+body > .register-container > .register-form > div{
+    width: 100%;
+    align-items: stretch;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    margin: 0.7rem 0;
+}
+
+body > .register-container > .register-form > div > span{
+    margin: 0.7rem 0;
+}
+
+body > .register-container > .register-form > div > div > .input{
+    width: 19rem;
+    height: 1.3rem;
+    border: 0.0625rem solid rgb(170,170,170);
+    border-radius: 0.3rem;
+    padding: 0.8rem 1rem;
+}
+
+/* 경고 메세지 */
+body > .register-container > .register-form > .warning{
+    color: red;
+    display: none;
+    font-size: 0.8rem;
+    margin: unset !important;
+    padding-left: 9.5rem;
+    transform: translateY(-0.3rem);
+}
+
+/* 주소 검색 */
+body > .register-container > .register-form > .address-label > div > .address-container{
+    align-items: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+}
+body > .register-container > .register-form > .address-label > div > .address-container > .input{
+    margin-bottom: 0.5rem;
+}
+
+body > .register-container > .register-form > .address-label > div > .address-container > .hidden{
+    display: none;
+}
+
+body > .register-container > .register-form > .address-label > div > .address-container > .address-button{
+    width: 21rem;
+    border: 0.0625rem solid rgb(170,170,170);
+    border-radius: 0.3rem;
+    padding: 0.8rem 1rem;
+    cursor: pointer;
+    font-size: 1rem;
+}
+
+body > .register-container > .register-form > .address-label > div > .address-container > .address-button > span{
+    line-height: 1rem;
+}
+
+body > .register-container > .register-form > .address-label > div > .address-container > .address-button > .search-icon{
+    margin-right: 0.2rem;
+    width: 0.9rem;
+}
+
+body > .register-container > .register-form > .address-label > div > .address-container > .input{
+    width: 19rem;
+    height: 1.3rem;
+    border: 0.0625rem solid rgb(170,170,170);
+    border-radius: 0.3rem;
+    padding: 0.8rem 1rem;
+}
+
+/* 제출 버튼 */
+body > .register-container > .register-form > .submit-container{
+    width: 100%;
+    height: 5rem;
+    align-items: center;
+    display: flex;
+    margin-top: 1.5rem;
+    flex-direction: row;
+    justify-content: center;
+}
+body > .register-container > .register-form > .submit-container > .submit-button{
+    width: 20rem;
+    height: 4rem;
+    border: 0.0625rem solid rgb(170,170,170);
+    border-radius: 0.5rem;
+}

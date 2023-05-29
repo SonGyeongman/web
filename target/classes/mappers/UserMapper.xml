@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.example.test2.mappers.IUserMapper">
+    <select id="selectUser"
+            resultType="com.example.test2.entities.UserEntity">
+        SELECT *
+        FROM `test2`.`users`
+        WHERE `email` = #{email}
+          AND `password` = #{password}
+    </select>
+    <insert id="insertUser">
+        INSERT INTO `test2`.`users`(`name`, `email`, `password`, `phone`)
+        VALUES (#{name}, #{email}, #{password}, #{phone})
+    </insert>
+    <select id="selectEmailCheck"
+            resultType="_int">
+        SELECT COUNT(1) FROM `test2`.`users` WHERE email = #{email}
+    </select>
+    <select id="selectPhoneCheck"
+            resultType="_int">
+        SELECT COUNT(1) FROM `test2`.`users` WHERE phone = #{phone}
+    </select>
+    <select id="selectUserSession"
+            resultType="com.example.test2.entities.UserEntity">
+        SELECT *
+        FROM `test2`.`users`
+        WHERE `index` = #{index}
+    </select>
+</mapper>

@@ -1,0 +1,78 @@
+<!doctype html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
+    <script th:src="@{/main/resources/scripts/register-search-address.js}" defer></script>
+    <linK th:href="@{/resources/stylesheets/commons.css}" rel="stylesheet">
+    <link th:href="@{/main/resources/stylesheets/add.css}" rel="stylesheet">
+    <title>Document</title>
+</head>
+<body>
+<div class="register-container">
+    <div class="title">명함수정</div>
+    <form class="register-form" method="post">
+        <input hidden type="text" name="index" th:value="${businessCardEntity.getIndex}">
+        <input hidden type="text" name="request" th:value="${referer}">
+        <div class="email-label">
+            <span>회사이름</span>
+            <div>
+                <input th:value="${businessCardEntity.getCompanyName}" class="input email" type="text" name="companyName" autofocus maxlength="80" placeholder="회사이름을 입력해주세요">
+            </div>
+        </div>
+        <div class="warning" id="login-warning">
+        </div>
+        <div class="password-label">
+            <span>이름</span>
+            <div>
+                <input th:value="${businessCardEntity.getName}" class="input password" type="text" name="name" maxlength="20" placeholder="이름을 입력해주세요">
+            </div>
+        </div>
+        <div class="warning" id="password-warning">
+        </div>
+        <div class="password-check-label">
+            <span>직책</span>
+            <div>
+                <input th:value="${businessCardEntity.getPosition}" class="input password-check" type="text" name="position" maxlength="20"
+                       placeholder="직책을 입력해주세요">
+            </div>
+        </div>
+        <div class="warning" id="passwordCheck-warning">
+        </div>
+        <div class="name-label">
+            <span>휴대폰 번호</span>
+            <div>
+                <input th:value="${businessCardEntity.getPhone}" class="input name" type="tel" name="phone" maxlength="40" placeholder="휴대폰 번호를 입력해주세요">
+            </div>
+        </div>
+        <div class="contact-label">
+            <span>이메일</span>
+            <div>
+                <input th:value="${businessCardEntity.getEmail}" class="input contact" type="email" name="email" placeholder="이메일을 입력해주세요">
+            </div>
+        </div>
+        <div class="warning" id="contact-warning">
+        </div>
+        <div class="address-label">
+            <span>주소</span>
+            <div>
+                <div class="address-container">
+                    <input class="address" id="address-postal" hidden name="addressPostal">
+                    <input th:value="${businessCardEntity.getAddress}" class="input address" id="address-primary" type="text" name="addressPrimary" readonly>
+                    <button class="address-button" id="address-button" type="button">
+                        <img class="search-icon" alt="검색" src="/images/search.png">
+                        <span>다시 주소 검색</span>
+                    </button>
+                </div>
+            </div>
+        </div>
+        <div class="submit-container">
+            <input class="submit-button" type="submit" value="수정하기">
+        </div>
+    </form>
+</div>
+</body>
+</html>

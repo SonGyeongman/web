@@ -1,0 +1,89 @@
+body > .title-container {
+    width: 60rem;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    margin-top: 3rem;
+    margin-bottom: 2rem;
+}
+
+body > .title-container > div {
+    font-size: 2rem;
+    font-weight: bold;
+}
+
+body > .title-container > a {
+    border: 0.0625rem solid black;
+    padding: 0.5rem 1rem;
+    border-radius: 0.3rem;
+}
+
+body > .table-container > table {
+    width: 60rem;
+    border-collapse: collapse;
+}
+
+body > .table-container > table > thead {
+    border-top: 0.2rem solid black;
+    border-bottom: 0.0625rem solid black;
+}
+
+body > .table-container > table > thead > tr > th{
+    padding: 0.8rem 0;
+    font-size: 1.2rem;
+}
+
+body > .table-container > table > tbody > tr > td {
+    padding: 0.8rem 0;
+    border-bottom: 0.0625rem solid rgb(230,230,230);
+    text-align: center;
+}
+
+body > .table-container > table > tbody > tr > td > .remove{
+    border: 0.0625rem solid red;
+    padding: 0.3rem 0.8rem;
+    border-radius: 0.3rem;
+    color: red;
+}
+
+body > .table-container > table > tbody > tr > td > .update{
+    border: 0.0625rem solid blue;
+    padding: 0.3rem 0.8rem;
+    border-radius: 0.3rem;
+    color: blue;
+}
+
+body > .table-container > .number {
+    align-items: center;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    margin-top: 1rem;
+}
+
+body > .table-container > .number > a {
+    width: 1.5rem;
+    height: 1.5rem;
+    border: 0.0625rem solid rgb(210, 210, 210);
+    text-align: center;
+}
+
+body > .table-container > .number > a + a {
+    margin-left: 0.5rem;
+}
+
+body > .user-container{
+    width: 60rem;
+    display: flex;
+    flex-direction: row;
+    margin-top: 1rem;
+    justify-content: flex-end;
+}
+
+body > .user-container > .user {
+    margin-right: 0.5rem;
+    font-weight: bold;
+}
+body > .user-container > .logout {
+}

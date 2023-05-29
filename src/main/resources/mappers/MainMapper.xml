@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.example.test2.mappers.IMainMapper">
+    <select id="selectBusinessCardEntity"
+            resultType="com.example.test2.entities.BusinessCardEntity">
+        SELECT `index`        AS `index`,
+               `company_name` AS `companyName`,
+               `name`         AS `name`,
+               `position`     AS `position`,
+               `phone`        AS `phone`,
+               `email`        AS `email`,
+               `address`      AS `address`,
+               `user_id`      AS `userId`,
+               `date`         AS `date`
+        FROM `test2`.`business_card`
+        WHERE `user_id` = #{userId}
+        ORDER BY `index` DESC
+        LIMIT #{limit} OFFSET #{offset}
+    </select>
+
+    <select id="selectTotalCount"
+            resultType="_int">
+        SELECT COUNT(1)
+        FROM `test2`.`business_card`
+        WHERE `user_id` = #{userId}
+    </select>
+
+    <delete id="deleteBusinessCard">
+        DELETE
+        FROM `test2`.`business_card`
+        WHERE `index` = #{index}
+    </delete>
+
+    <insert id="insertBusinessCard"
+            parameterType="com.example.test2.entities.BusinessCardEntity">
+        INSERT INTO `test2`.`business_card`(`company_name`, `name`, `position`, `phone`, `email`, `address`, `user_id`)
+        VALUES (#{companyName}, #{name}, #{position}, #{phone}, #{email}, #{address}, #{userId})
+    </insert>
+
+    <select id="selectOneInfo"
+            resultType="com.example.test2.entities.BusinessCardEntity">
+        SELECT `index`        AS `index`,
+               `company_name` AS `companyName`,
+               `name`         AS `name`,
+               `position`     AS `position`,
+               `phone`        AS `phone`,
+               `email`        AS `email`,
+               `address`      AS `address`
+        FROM `test2`.`business_card`
+        WHERE `index` = #{index}
+    </select>
+    <update id="updateBusinessCard"
+            parameterType="com.example.test2.entities.BusinessCardEntity">
+        UPDATE `test2`.`business_card`
+        SET `company_name` = #{companyName},
+            `name`         = #{name},
+            `position`     = #{position},
+            `phone`        = #{phone},
+            `email`        = #{email},
+            `address`      = #{address}
+        WHERE `index` = #{index}
+    </update>
+</mapper>

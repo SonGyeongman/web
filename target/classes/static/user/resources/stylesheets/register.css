@@ -1,0 +1,75 @@
+@import "/resources/stylesheets/common.css";
+
+body > .register-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+body > .register-container > img {
+    width: 15rem;
+    margin: 2rem 0 2rem 0;
+}
+
+body > .register-container > .register-text {
+    width: 28rem;
+    text-align: left;
+    font-weight: bold;
+}
+
+body > .register-container > .register-form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+body > .register-container > .register-form > .check {
+    width: 100%;
+    text-align: left;
+    margin-top: 0.5rem;
+    margin-left: 0.2rem;
+    font-size: 0.8rem;
+}
+
+body > .register-container > .register-form > .input-label {
+    width: auto;
+    border:0.0625rem solid var(--gray);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: 0.8rem;
+}
+
+body > .register-container > .register-form > .input-label > input {
+    width: 25rem;
+    padding: 1.1rem 2rem;
+    border-left: 0.0625rem solid var(--gray);
+    font-size: 1rem;
+}
+
+body > .register-container > .register-form > .input-label > i {
+    width: 1rem;
+    font-size: 1.5rem;
+    color: var(--gray);
+    padding: 0 1.2rem 0 1rem;
+}
+
+body > .register-container > .register-form > .line {
+    border-bottom: 0.0625rem solid var(--gray);
+    margin: 1rem 0 1.5rem 0;
+    width: 28rem;
+}
+
+body > .register-container > .register-form > .register-button {
+    background-color: blue;
+    color: white;
+    font-size: 1rem;
+    padding: 1rem 0;
+    margin-bottom: 1rem;
+}
+
+body > .register-container > .register-form > .copyright {
+    font-size: 1rem;
+}

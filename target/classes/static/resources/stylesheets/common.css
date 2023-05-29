@@ -1,0 +1,47 @@
+@charset "UTF-8";
+:root{
+    --gray: rgb(200,200,200);
+    /* 사이즈 */
+    --width: 75.625rem;
+    /* basic-color */
+    --white: rgb(255,255,255);
+    --black: rgb(0,0,0);
+    /* gray-light-dark */
+    --gray-light-4:rgb(240,240,240);
+    --gray-light-3:rgb(230,230,230);
+    --gray-light-2:rgb(220,220,220);
+    --gray-light-1:rgb(210,210,210);
+    --gray-dark-1:rgb(190,190,190);
+    --gray-dark-2:rgb(180,180,180);
+    --gray-dark-3:rgb(170,170,170);
+    --gray-dark-4:rgb(160,160,160);
+    --gray-dark-5:rgb(150,150,150);
+}
+
+body {
+    width: 100%;
+    min-height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 0;
+    overflow: hidden;
+}
+
+input, select {
+    width: 100%;
+    background-color: unset;
+    border: unset;
+    border-image: unset;
+    box-sizing: border-box;
+    color: unset;
+    margin: unset;
+    outline: unset;
+    padding: unset;
+}
+
+a{
+    text-decoration: none;
+    color: unset;
+}
