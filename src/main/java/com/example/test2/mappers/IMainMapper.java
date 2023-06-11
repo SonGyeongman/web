@@ -11,7 +11,15 @@ public interface IMainMapper {
                                                   @Param(value = "limit") int limit,
                                                   @Param(value = "offset") int offset);
 
-    int selectTotalCount(@Param(value = "userId") int userId);
+    BusinessCardEntity[] selectSearchMainList(@Param(value = "userId") int userId,
+                                                  @Param(value = "limit") int limit,
+                                                  @Param(value = "offset") int offset,
+                                                  @Param(value = "searchSelect") String searchSelect,
+                                                  @Param(value = "search") String search);
+
+    int selectTotalCount(@Param(value = "userId") int userId,
+                         @Param(value = "searchSelect") String searchSelect,
+                         @Param(value = "search") String search);
 
     int deleteBusinessCard(@Param(value = "index") int index);
 

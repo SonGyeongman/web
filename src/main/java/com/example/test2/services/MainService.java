@@ -15,7 +15,38 @@ public class MainService {
         this.mainMapper = mainMapper;
     }
 
-    public BusinessCardVo getABusinessCard(int userId, int page){
+    public BusinessCardVo getMainList(int userId, int page) {
+        BusinessCardVo businessCardVo = this.getBusinessCardVo(userId, page, null, null);
+        businessCardVo.setBusinessCardEntity(this.mainMapper.selectBusinessCardEntity(userId, businessCardVo.getArticleCountPerPage(), (businessCardVo.getRequestPage() - 1) * businessCardVo.getArticleCountPerPage()));
+        return businessCardVo;
+    }
+
+    public BusinessCardVo getSearchMainList(int userId, int page, String searchSelect, String search) {
+        BusinessCardVo businessCardVo = this.getBusinessCardVo(userId, page, searchSelect, search);
+        businessCardVo.setBusinessCardEntity(this.mainMapper.selectSearchMainList(userId, businessCardVo.getArticleCountPerPage(),
+                (businessCardVo.getRequestPage() - 1) * businessCardVo.getArticleCountPerPage(),
+                searchSelect,
+                search));
+        return businessCardVo;
+    }
+
+    public void deleteBusinessCard(int index) {
+        this.mainMapper.deleteBusinessCard(index);
+    }
+
+    public void setBusinessCard(BusinessCardEntity businessCardEntity) {
+        this.mainMapper.insertBusinessCard(businessCardEntity);
+    }
+
+    public BusinessCardEntity getUpdateInfo(int index) {
+        return this.mainMapper.selectOneInfo(index);
+    }
+
+    public void setUpdateInfo(BusinessCardEntity businessCardEntity) {
+        this.mainMapper.updateBusinessCard(businessCardEntity);
+    }
+
+    private BusinessCardVo getBusinessCardVo(int userId, int page, String searchSelect, String search) {
         BusinessCardVo businessCardVo = new BusinessCardVo();
         businessCardVo.setArticleCountPerPage(10);
         businessCardVo.setRequestPage(page);
@@ -24,7 +55,7 @@ public class MainService {
         //한페이지에 표시할 article 수
         int articleCountPerPage = businessCardVo.getArticleCountPerPage();
         //article 총 갯수
-        int totalArticleCount = this.mainMapper.selectTotalCount(userId);
+        int totalArticleCount = this.mainMapper.selectTotalCount(userId, searchSelect, search);
         //클라이언트가 요청한 현재 페이지
         int requestPage = businessCardVo.getRequestPage();
         //최소 페이지, 1페이지가 최소 페이지 이므로 1로 초기화
@@ -41,23 +72,6 @@ public class MainService {
         businessCardVo.setMaxPage(maxPage);
         businessCardVo.setStartPage(startPage);
         businessCardVo.setEndPage(endPage);
-        businessCardVo.setBusinessCardEntity(this.mainMapper.selectBusinessCardEntity(userId,articleCountPerPage,(requestPage - 1) * articleCountPerPage));
         return businessCardVo;
-    }
-
-    public void deleteBusinessCard(int index){
-        this.mainMapper.deleteBusinessCard(index);
-    }
-
-    public void setBusinessCard(BusinessCardEntity businessCardEntity){
-        this.mainMapper.insertBusinessCard(businessCardEntity);
-    }
-
-    public BusinessCardEntity getUpdateInfo(int index){
-        return this.mainMapper.selectOneInfo(index);
-    }
-
-    public void setUpdateInfo(BusinessCardEntity businessCardEntity){
-        this.mainMapper.updateBusinessCard(businessCardEntity);
     }
 }

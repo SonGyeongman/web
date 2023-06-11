@@ -16,7 +16,7 @@
     <div class="title">명함수정</div>
     <form class="register-form" method="post">
         <input hidden type="text" name="index" th:value="${businessCardEntity.getIndex}">
-        <input hidden type="text" name="request" th:value="${referer}">
+        <input hidden type="text" name="referer" th:value="${referer}">
         <div class="email-label">
             <span>회사이름</span>
             <div>
@@ -61,7 +61,7 @@
             <div>
                 <div class="address-container">
                     <input class="address" id="address-postal" hidden name="addressPostal">
-                    <input th:value="${businessCardEntity.getAddress}" class="input address" id="address-primary" type="text" name="addressPrimary" readonly>
+                    <input th:value="${businessCardEntity.getAddress}" class="input address" id="address-primary" type="text" name="address">
                     <button class="address-button" id="address-button" type="button">
                         <img class="search-icon" alt="검색" src="/images/search.png">
                         <span>다시 주소 검색</span>

@@ -21,6 +21,12 @@ public class BusinessCardVo extends BusinessCardEntity implements IResult<Busine
     //최대 페이지
     private int maxPage;
 
+    private String searchSelect;
+
+    private String search;
+
+    private String check;
+
     private BusinessCardEntity[] businessCardEntity;
 
     public BusinessCardEntity[] getBusinessCardEntity() {
@@ -77,6 +83,30 @@ public class BusinessCardVo extends BusinessCardEntity implements IResult<Busine
 
     public void setMaxPage(int maxPage) {
         this.maxPage = maxPage;
+    }
+
+    public String getSearchSelect() {
+        return searchSelect;
+    }
+
+    public void setSearchSelect(String searchSelect) {
+        this.searchSelect = searchSelect;
+    }
+
+    public String getSearch() {
+        return search;
+    }
+
+    public void setSearch(String search) {
+        this.search = search;
+    }
+
+    public String getCheck() {
+        return check;
+    }
+
+    public void setCheck(String check) {
+        this.check = check;
     }
 
     @Override

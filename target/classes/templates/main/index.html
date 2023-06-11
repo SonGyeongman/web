@@ -11,13 +11,28 @@
 </head>
 <body>
 <div class="user-container">
-    <div class="user" th:text="${sessionEntity.getName + '님'}"></div>
+    <div class="user" th:text="${session.userVo.getName + '님'}"></div>
     <div class="logout">
         <a th:href="@{/user/logout}">로그아웃</a>
     </div>
 </div>
 <div class="title-container">
     <div>명함 목록</div>
+    <form action="/main/search" class="search-container" method="get">
+        <select class="search-select" name="searchSelect">
+            <option value="all">전체</option>
+            <option value="companyName">회사이름</option>
+            <option value="name">이름</option>
+            <option value="phone">전화번호</option>
+            <option value="email">이메일</option>
+            <option value="address">주소</option>
+        </select>
+        <div class="search-input-container">
+            <input class="search" type="text" name="search" placeholder="검색해주세요">
+            <input hidden class="search" type="text" name="page" th:value="1">
+            <input class="search-submit" type="submit" value="검색">
+        </div>
+    </form>
     <a th:href="@{/main/add}">추가</a>
 </div>
 <div class="table-container">
@@ -33,6 +48,9 @@
         </tr>
         </thead>
         <tbody>
+        <tr th:if="${businessCardVos.getBusinessCardEntity.length == 0}">
+            <td colspan="6">조회된 결과가 없습니다.</td>
+        </tr>
         <tr th:each="businessCardVo : ${businessCardVos.getBusinessCardEntity}">
             <td th:text="${businessCardVo.getCompanyName()}"></td>
             <td th:text="${businessCardVo.getName() + ' ' + businessCardVo.getPosition()}"></td>
@@ -40,16 +58,16 @@
             <td th:text="${businessCardVo.getEmail()}"></td>
             <td th:text="${businessCardVo.getAddress()}"></td>
             <td>
-                <a class="remove" onclick="alert('정말로 삭제하겠습니까?');" th:href="@{/main/remove(index = ${businessCardVo.getIndex()})}">삭제</a>
+                <a class="remove" onclick="return confirm('정말로 삭제하겠습니까?');" th:href="@{/main/remove(index = ${businessCardVo.getIndex()})}">삭제</a>
                 <a class="update" th:href="@{/main/update(index = ${businessCardVo.getIndex()})}">수정</a>
             </td>
         </tr>
         </tbody>
     </table>
-    <div class="number">
+    <div class="number" th:if="${businessCardVos.getCheck().equals('list')}">
         <a th:href="@{'/main/list/' + ${businessCardVos.getMinPage()}}" target="_self"
            th:if="${businessCardVos.getRequestPage() > businessCardVos.getMinPage()}">&lt;&lt;</a>
-        <a th:href="@{'list/' + ${businessCardVos.getRequestPage() - 1}}" target="_self"
+        <a th:href="@{'/main/list/' + ${businessCardVos.getRequestPage() - 1}}" target="_self"
            th:if="${businessCardVos.getRequestPage() > businessCardVos.getMinPage()}">&lt;</a>
 
         <a th:href="@{'/main/list/' + ${page}}"
@@ -63,6 +81,25 @@
         <a th:href="@{'/main/list/' + ${businessCardVos.getRequestPage() + 1}}" target="_self"
            th:if="${businessCardVos.getRequestPage() < businessCardVos.getMaxPage()}">&gt;</a>
         <a th:href="@{'/main/list/' + ${businessCardVos.getMaxPage()}}" target="_self"
+           th:if="${businessCardVos.getRequestPage() < businessCardVos.getMaxPage()}">&gt;&gt;</a>
+    </div>
+    <div class="number" th:if="${businessCardVos.getCheck().equals('search')}">
+        <a th:href="@{/main/search (searchSelect=${businessCardVos.getSearchSelect()}, search=${businessCardVos.getSearch()}, page=${businessCardVos.getMinPage()})}" target="_self"
+           th:if="${businessCardVos.getRequestPage() > businessCardVos.getMinPage()}">&lt;&lt;</a>
+        <a th:href="@{/main/search (searchSelect=${businessCardVos.getSearchSelect()}, search=${businessCardVos.getSearch()}, page= ${businessCardVos.getRequestPage() - 1})}" target="_self"
+           th:if="${businessCardVos.getRequestPage() > businessCardVos.getMinPage()}">&lt;</a>
+
+        <a th:href="@{/main/search (searchSelect=${businessCardVos.getSearchSelect()}, search=${businessCardVos.getSearch()}, page= ${page})}"
+           th:each="page : ${#numbers.sequence(businessCardVos.getStartPage(), businessCardVos.getRequestPage()-1)}"
+           th:text="${page}" th:if="${businessCardVos.getRequestPage() > businessCardVos.getMinPage()}"></a>
+        <a th:text="${businessCardVos.getRequestPage()}" style="border: 0.0625rem solid black;"></a>
+        <a th:href="@{/main/search (searchSelect=${businessCardVos.getSearchSelect()}, search=${businessCardVos.getSearch()}, page= ${page})}"
+           th:each="page : ${#numbers.sequence(businessCardVos.getRequestPage() + 1, businessCardVos.getEndPage())}"
+           th:text="${page}" th:if="${businessCardVos.getRequestPage() < businessCardVos.getMaxPage()}"></a>
+
+        <a th:href="@{/main/search (searchSelect=${businessCardVos.getSearchSelect()}, search=${businessCardVos.getSearch()}, page= ${businessCardVos.getRequestPage() + 1})}" target="_self"
+           th:if="${businessCardVos.getRequestPage() < businessCardVos.getMaxPage()}">&gt;</a>
+        <a th:href="@{/main/search (searchSelect=${businessCardVos.getSearchSelect()}, search=${businessCardVos.getSearch()}, page= ${businessCardVos.getMaxPage()})}" target="_self"
            th:if="${businessCardVos.getRequestPage() < businessCardVos.getMaxPage()}">&gt;&gt;</a>
     </div>
 </div>

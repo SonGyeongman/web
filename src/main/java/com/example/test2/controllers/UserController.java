@@ -14,6 +14,7 @@ import org.springframework.web.servlet.ModelAndView;
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 @Controller
 @RequestMapping(value = "/user")
@@ -35,13 +36,19 @@ public class UserController {
     @RequestMapping(value = "login", method = RequestMethod.POST)
     public ModelAndView postLogin(ModelAndView modelAndView,
                                   HttpServletResponse response,
+                                  HttpServletRequest request,
+                                  HttpSession session,
                                   UserVo userVo){
         userVo.setResult(null);
         this.userService.login(userVo);
+//        if(userVo.getResult() == UserEnum.SUCCESS){
+//            Cookie cookie = new Cookie("sk", String.valueOf(userVo.getIndex()));
+//            cookie.setPath("/");
+//            response.addCookie(cookie);
+//        }
         if(userVo.getResult() == UserEnum.SUCCESS){
-            Cookie cookie = new Cookie("sk", String.valueOf(userVo.getIndex()));
-            cookie.setPath("/");
-            response.addCookie(cookie);
+            session = request.getSession();
+            session.setAttribute("userVo", userVo);
         }
         modelAndView.addObject("userVo", userVo)
                 .setViewName("user/login");
@@ -51,16 +58,21 @@ public class UserController {
     @RequestMapping(value = "logout", method = RequestMethod.GET)
     public ModelAndView getLogout(HttpServletRequest request,
                                   HttpServletResponse response,
+                                  HttpSession session,
                                   ModelAndView modelAndView){
-        if(request.getCookies() != null){
-            for(Cookie cookie : request.getCookies()){
-                if(cookie.getName().equals("sk")){
-                    cookie.setMaxAge(0);
-                    cookie.setPath("/");
-                    response.addCookie(cookie);
-                    break;
-                }
-            }
+//        if(request.getCookies() != null){
+//            for(Cookie cookie : request.getCookies()){
+//                if(cookie.getName().equals("sk")){
+//                    cookie.setMaxAge(0);
+//                    cookie.setPath("/");
+//                    response.addCookie(cookie);
+//                    break;
+//                }
+//            }
+//        }
+        session = request.getSession(false);
+        if(session != null){
+            session.invalidate();
         }
         modelAndView.setViewName("redirect:/user/login");
         return modelAndView;
