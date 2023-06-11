@@ -13,6 +13,42 @@ body > .title-container > div {
     font-weight: bold;
 }
 
+body > .title-container > .search-container {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+}
+
+body > .title-container > .search-container > .search-select{
+    width: 10rem;
+    border: 0.0625rem solid black;
+    padding: 0.5rem 1rem;
+    margin-right: 0.5rem;
+}
+body > .title-container > .search-container > .search-input-container {
+    width: 25rem;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    border: 0.0625rem solid black;
+    margin-bottom: 0.1rem;
+}
+
+body > .title-container > .search-container > .search-input-container > .search {
+    padding: 0.5rem 1rem;
+    width: 85%;
+}
+
+body > .title-container > .search-container > .search-input-container > .search-submit {
+    width: 15%;
+    padding: 0.5rem 1rem;
+    border-left: 0.0625rem solid black;
+    cursor: pointer;
+}
+
+
 body > .title-container > a {
     border: 0.0625rem solid black;
     padding: 0.5rem 1rem;
@@ -85,5 +121,4 @@ body > .user-container > .user {
     margin-right: 0.5rem;
     font-weight: bold;
 }
-body > .user-container > .logout {
-}
+

@@ -19,11 +19,58 @@
         LIMIT #{limit} OFFSET #{offset}
     </select>
 
+    <select id="selectSearchMainList"
+            resultType="com.example.test2.entities.BusinessCardEntity">
+        SELECT `index`        AS `index`,
+               `company_name` AS `companyName`,
+               `name`         AS `name`,
+               `position`     AS `position`,
+               `phone`        AS `phone`,
+               `email`        AS `email`,
+               `address`      AS `address`,
+               `user_id`      AS `userId`,
+               `date`         AS `date`
+        FROM `test2`.`business_card`
+        WHERE `user_id` = #{userId}
+        <if test='searchSelect.equals("companyName")'>
+            AND REPLACE(`company_name`,'',' ') LIKE CONCAT('%',#{search},'%')
+        </if>
+        <if test='searchSelect.equals("name")'>
+            AND REPLACE(`name`,'',' ') LIKE CONCAT('%',#{search},'%')
+        </if>
+        <if test='searchSelect.equals("phone")'>
+            AND REPLACE(`phone`,'',' ') LIKE CONCAT('%',#{search},'%')
+        </if>
+        <if test='searchSelect.equals("email")'>
+            AND REPLACE(`email`,'',' ') LIKE CONCAT('%',#{search},'%')
+        </if>
+        <if test='searchSelect.equals("address")'>
+            AND REPLACE(`address`,'',' ') LIKE CONCAT('%',#{search},'%')
+        </if>
+        ORDER BY `index` DESC
+        LIMIT #{limit} OFFSET #{offset}
+    </select>
+
     <select id="selectTotalCount"
             resultType="_int">
         SELECT COUNT(1)
         FROM `test2`.`business_card`
         WHERE `user_id` = #{userId}
+        <if test='searchSelect != null and searchSelect.equals("companyName")'>
+            AND REPLACE(`company_name`,'',' ') LIKE CONCAT('%',#{search},'%')
+        </if>
+        <if test='searchSelect != null and searchSelect.equals("name")'>
+            AND REPLACE(`name`,'',' ') LIKE CONCAT('%',#{search},'%')
+        </if>
+        <if test='searchSelect != null and searchSelect.equals("phone")'>
+            AND REPLACE(`phone`,'',' ') LIKE CONCAT('%',#{search},'%')
+        </if>
+        <if test='searchSelect != null and searchSelect.equals("email")'>
+            AND REPLACE(`email`,'',' ') LIKE CONCAT('%',#{search},'%')
+        </if>
+        <if test='searchSelect != null and searchSelect.equals("address")'>
+            AND REPLACE(`address`,'',' ') LIKE CONCAT('%',#{search},'%')
+        </if>
     </select>
 
     <delete id="deleteBusinessCard">
@@ -59,6 +106,6 @@
             `phone`        = #{phone},
             `email`        = #{email},
             `address`      = #{address}
-        WHERE `index` = #{index}
+        WHERE `index` = #{index} AND `user_id` = #{userId}
     </update>
 </mapper>
